@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClickDrag : MonoBehaviour
 {
-    public float forceAmmount = 500;
+    public float forceAmount = 500;
 
     Rigidbody dragObject;
     Vector3 offset;
@@ -50,7 +50,7 @@ public class ClickDrag : MonoBehaviour
                                                     selectionDistance)) - orginalPosition;
 
             dragObject.velocity = (orginalPosition + mousePositionOffset - dragObject.transform.position)
-                                    * forceAmmount * Time.deltaTime;
+                                    * forceAmount * Time.deltaTime;
         }
     }
 }
