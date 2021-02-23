@@ -6,15 +6,26 @@ public class ClickDrag : MonoBehaviour
 {
     public float forceAmount = 500;
 
+    public Rigidbody DragObject => dragObject;
+
     Rigidbody dragObject;
     Vector3 offset;
 
     Vector3 orginalPosition;
     float selectionDistance;
 
+    Vector3 camPosition;
+
+    private void Start()
+    {
+        camPosition = FindObjectOfType<Camera>().transform.position;
+    }
+
     private void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -31,6 +42,11 @@ public class ClickDrag : MonoBehaviour
                 orginalPosition = hit.collider.transform.position;
             }
 
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            selectionDistance += Input.mouseScrollDelta.y;
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -51,6 +67,8 @@ public class ClickDrag : MonoBehaviour
 
             dragObject.velocity = (orginalPosition + mousePositionOffset - dragObject.transform.position)
                                     * forceAmount * Time.deltaTime;
+
+            
         }
     }
 }
